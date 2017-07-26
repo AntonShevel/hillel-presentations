@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 1</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../reveal.js-3.5.0/css/reveal.css">
+    <link rel="stylesheet" href="../reveal.js-3.5.0/css/theme/league.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../reveal.js-3.5.0/lib/css/zenburn.css">
+
+    <!--[if lt IE 9]>
+    <script src="../reveal.js-3.5.0/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <p>
+                <img data-src="img/hillel.png" style="border: none; background: transparent; box-shadow: none">
+            </p>
+            <h1>PHP</h1>
+            <h3>Урок 1</h3>
+        </section>
+
+        <section>
+            <h2>Всем привет</h2>
+            <h4>Меня зовут Антон 😇</h4>
+
+            <p>6 лет опыта в веб-разработке</p>
+            <p>PHP, Node.JS, Elixir</p>
+        </section>
+
+        <section>
+            <h1>Немного истории...</h1>
+        </section>
+
+        <section>
+            <h1>Rasmus Lerdorf</h1>
+            <p><img data-src="img/rasmus_lerdorf.jpg" height="400"></p>
+        </section>
+
+        <section>
+            <ul>
+                <li>1994 - всё началось...</li>
+                <li>1998 - вышел PHP3</li>
+                <li>2000 - вышел PHP4</li>
+                <li>2004 - вышел PHP5</li>
+                <li>2015 - вышел PHP7</li>
+            </ul>
+        </section>
+
+        <section>
+            <section>
+                <h1>Почему PHP?</h1>
+
+                <ul>
+                    <li>Легко изучать</li>
+                    <li>Входит в ТОП-10 самых популярных языков</li>
+                    <li>ТОП-5 в самых популярных языках на GitHub</li>
+                    <li>Огромное <a href="http://stackoverflow.com">StackOverflow</a> сообщество 🙂</li>
+                </ul>
+            </section>
+            <section>
+                <a href="http://wikipedia.org">
+                    <img data-src="img/wikipedia.png" height="200">
+                </a>
+                <a class="fragment" href="http://facebook.com">
+                    <img data-src="img/facebook.png" height="200">
+                </a>
+                <a class="fragment" href="http://slack.com">
+                    <img data-src="img/slack.png" width="300">
+                </a>
+                <a class="fragment" href="http://baidu.com">
+                    <img data-src="img/baidu.png" height="200">
+                </a>
+                <a class="fragment" href="http://etsy.com">
+                    <img data-src="img/etsy.svg" width="300">
+                </a>
+                <a class="fragment" href="http://tumblr.com">
+                    <img data-src="img/tumblr.png" height="200">
+                </a>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <p>WWW <small>World Wide Web</small></p>
+                <p>HTTP <small>Hyper Text Transfer Protocol</small></p>
+                <p>HTML <small>Hyper Text Markup Language</small></p>
+            </section>
+            <section>
+                <h2>Tim Bernes Lee</h2>
+                <img data-src="img/tim-bernes-lee.jpg" height="400">
+            </section>
+            <section>
+                <h2>HTTP диалог: запрос</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    GET /wiki/страница HTTP/1.1
+                    Host: ru.wikipedia.org
+                    User-Agent: Mozilla/5.0 (X11; U; Linux i686; ru; rv:1.9b5) Gecko/2008050509 Firefox/3.0b5
+                    Accept: text/html
+                    Connection: close
+                    (пустая строка)
+                </code>
+                </pre>
+
+            </section>
+            <section>
+                <h2>HTTP диалог: ответ</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    HTTP/1.1 200 OK
+                    Date: Wed, 11 Feb 2009 11:20:59 GMT
+                    Server: Apache
+                    X-Powered-By: PHP/5.2.4-2ubuntu5wm1
+                    Last-Modified: Wed, 11 Feb 2009 11:20:59 GMT
+                    Content-Language: ru
+                    Content-Type: text/html; charset=utf-8
+                    Content-Length: 1234
+                    Connection: close
+                    (пустая строка)
+                    (далее следует запрошенная страница в HTML)
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h2>HTML разметка</h2>
+                <pre>
+                    <code data-trim data-noescape>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+   &lt;head&gt;
+      &lt;meta charset="utf-8"&gt;
+      &lt;title&gt;HTML Document&lt;/title&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+      &lt;p&gt;
+        Текст
+      &lt;/p&gt;
+   &lt;/body&gt;
+&lt;/html&gt;
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h2>PHP - <s>Personal HomePage tools</s> Hypertext Preprocessor</h2>
+            </section>
+            <section>
+                <h2>Статическая страница</h2>
+                <img data-src="img/webpage-static.png" height="400">
+            </section>
+            <section>
+                <h2>Динамическая страница</h2>
+                <img data-src="img/webpage-dynamic.png" height="400">
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h1>Инструменты</h1>
+            </section>
+
+            <section>
+                <h2>PHP7 😲</h2>
+
+                <p><strong>Ubuntu</strong> <a href="https://launchpad.net/~ondrej/+archive/ubuntu/php/">Репозиторий</a></p>
+                <code>
+                    sudo add-apt-repository -y ppa:ondrej/php
+                    sudo apt-get update -y
+                </code>
+
+                <p><strong>MacOs</strong> <a href="https://brew.sh/">Brew</a></p>
+                <code>
+                    brew install php71
+                </code>
+
+                <p><strong>Windows</strong></p>
+                <p><a href="http://windows.php.net/download/">http://windows.php.net/download/</a></p>
+            </section>
+
+            <section>
+                <h2>Редактор</h2>
+                <a href="https://www.sublimetext.com/"><img data-src="img/sublime.png" height="200"></a>
+                <a href="https://www.atom.io/"><img data-src="img/atom.png" height="200"></a>
+                <a href="https://www.jetbrains.com/phpstorm/specials/phpstorm/phpstorm.html"><img data-src="img/phpstorm.png" height="200"></a>
+            </section>
+
+            <section>
+                <h2>Контроль версий</h2>
+                <a href="https://git-scm.com/book/ru/v1"><img src="img/git.png" height="200"></a>
+                <a href="http://github.com"><img src="img/github.png" height="200"></a>
+            </section>
+
+            <section>
+                <h2>Коммуникация</h2>
+                <a href="https://hillel-php.slack.com/">
+                    <img data-src="img/slack.png" height="200">
+                    <p>https://hillel-php.slack.com/</p>
+                </a>
+            </section>
+
+            <section>
+                <table>
+                    <tr>
+                        <td>
+                            <h2>Codewars</h2>
+                            <a href="http://codewars.com">
+                                <img data-src="img/codewars-logo.png" alt="">
+                            </a>
+                        </td>
+                        <td>
+                            <h2>Repl.it</h2>
+                            <a href="https://repl.it/languages/php">
+                                <img data-src="img/replit-logo.png" alt="">
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h1>&lt;?php Hello World 🌎</h1>
+            </section>
+
+            <section>
+                <pre>
+                    <code data-trim data-noescape>
+                        &lt;?php // PHP начинается с &lt;?php тега
+
+                        &lt;?php [ваш код] ?&gt;
+
+                        // Если файл содержит только PHP код, хорошей практикой
+                        // будет не ставить закрывающий тег
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code data-trim data-noescape>
+                        &lt;?php
+
+                        //  Комментарий в одну строку
+
+                        # Еще один вариант комментария
+
+                        /*
+                            Комментарий в
+                            несколько
+                            строк
+                        */
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code data-trim data-noescape>
+                        // Для вывода используются "echo" или "print"
+                        print('Hello '); // Выведет "Hello " без разрыва строки
+
+                        // () не обязательны для print и echo
+                        echo "World\n"; // Выведет "World" с разрывом строки
+                        // (каждая строка должна заканчиваться точкой с запятой)
+
+                        // Всё за пределеами &lt;?php тега выводится автоматически
+                        ?&gt;
+                        Hello World Again!
+                        &lt;?php
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2>Объявление переменных</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        /*
+                            Переменная начинается со знака $
+                            Имя переменной должно начинаться с буквы или символа подчеркивания
+                            и состоять из букв, цифр и символов подчеркивания
+                            в любом количестве
+                            Названия переменных регистрозависимы
+                        /*
+                        $number = 123;
+                        $string = "Text";
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Булев тип данных</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $bool = true;
+
+                        /*
+                            true && false == false
+                            true || false == false
+                            !true == false
+                        */
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Целые числа</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $a = 1234; // десятичное число
+                        $a = -123; // отрицательное число
+                        $a = 0123; // восьмеричное число (эквивалентно 83 в десятичной системе)
+                        $a = 0x1A; // шестнадцатеричное число (эквивалентно 26 в десятичной системе)
+                        $a = 0b11111111; // двоичное число (эквивалентно 255 в десятичной системе)
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Числа с плавающей точкой</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $a = 1.234;
+                        $b = 1.2e3; // запись в форме мантиссы и показателя степени
+                        $c = 7E-10; // запись в форме мантиссы и показателя степени
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Строки</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        echo 'строка без интерполяции';
+                        echo "строка с интерполяцией";
+                        $foo = 'text';
+
+                        echo "show me $foo" // выведет show me text
+                        echo "show me {$foo}" // выведет show me text
+
+                        echo "переход на новую строку - \n";
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+            <section>
+                <h2>Массивы</h2>
+                <pre>
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $arr = [1, 2, 3];
+                        $arr2 = [2, 3, 4, 5];
+
+                        $assocArray = [
+                            'foo' => 1,
+                            'bar' => 2
+                        ]; // ассоциативный массив
+
+                        $assocArray = [
+                            1    => 'a',
+                            '1'  => 'b',
+                            1.5  => 1,
+                            true => [],
+                        ]; // ключем и значением массива могут быть значения разных типов
+
+                        $arr + arr2 // объединение массивов
+
+                        $assocArray['1'] // образение к элементу массива
+                        $assocArray['2'] = 2; // добавить новый элемент с ключем "2"
+                        $arr[] = 4; // добавить элемент в конец массива
+
+                        var_dump($assocArray); // вывод информации о переменной
+                        print_r($arr); // вывод информации о переменной, без указания типов
+                    ?&gt;
+                </code>
+            </pre>
+            </section>
+        </section>
+
+        <section>
+            <h1>The End</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../reveal.js-3.5.0/lib/js/head.min.js"></script>
+<script src="../reveal.js-3.5.0/js/reveal.js"></script>
+
+<script>
+
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../reveal.js-3.5.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../reveal.js-3.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '../reveal.js-3.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '../reveal.js-3.5.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../reveal.js-3.5.0/plugin/zoom-js/zoom.js', async: true },
+      { src: '../reveal.js-3.5.0/plugin/notes/notes.js', async: true }
+    ]
+  });
+
+</script>
+
+</body>
+</html>

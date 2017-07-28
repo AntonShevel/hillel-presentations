@@ -1,0 +1,19 @@
+{
+  "name": "presentations",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonShevel/hillel-presentations.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonShevel/hillel-presentations/issues"
+  },
+  "homepage": "https://github.com/AntonShevel/hillel-presentations#readme",
+  "dependencies": {
+    "highlightjs": "9.10.0",
+    "reveal": "0.0.4",
+    "source-sans-pro": "git://github.com/adobe-fonts/source-sans-pro.git#release"
+  }
+}

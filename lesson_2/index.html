@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 1</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP🐘</h1>
+            <h3>Урок 2</h3>
+        </section>
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.types.integer.php" target="_blank">Числа</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $a = 0123; // восьмеричное число (запись начинается с 0)
+                        $a = 0x1A; // шестнадцатеричное число (запись начинается с 0x)
+                        $a = 0b11111111; // двоичное число (запись начинается с 0b)
+                    ?&gt;
+                </code>
+            </pre>
+            <a href="http://php.net/manual/ru/language.types.float.php" target="_blank">Точность чисел с плавающей точкой</a>
+        </section>
+
+        <section>
+            <h2>Арифметические операторы</h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        // + сложение
+                        // - вычитание
+                        // * умножение
+                        // / деление
+                        // % остаток от деления
+                        // ++ инкремент
+                        // -- декремент
+
+                        $foo = 2;
+                        echo $foo++ * 2; // 4
+                        $foo = 2;
+                        echo ++$foo * 2; // 6
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Операторы присвоения</h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $foo = 5;
+                        $foo += 1; // 6 , аналогично $foo = $foo + 1;
+                        $foo -= 4; // 2 , аналогично $foo = $foo - 4;
+                        $foo *= 2; // 4
+                        ...
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.types.string.php" target="_blank">Строки</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $bar = "some";
+                        $bar .= " string"; // аналогично тому, как на прошлом слайде
+
+                        $text = 'text with \' quote';
+                        // кавычка экранируется обратным слэшем (backslash)
+                        $text = 'text with \\ backslash';
+                        // обратный слэш экранируется обратным слэшем
+
+                        $text = "\t text with dollar \$ and $bar {$bar}";
+                        // интерполяция возможна как с {} так и без
+                        // \t – это табуляция
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.types.string.php" target="_blank">Строки 👻</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $string = "очень длинная"
+                            . "строка";
+
+                        // heredoc!
+                        $string = &lt;&lt;&lt;EOT
+                    еще более
+                    длинная строка
+                    EOT;
+
+                        $foo = "text";
+                        echo $foo[0]; // выведет t, НО не для русских букв
+                        $foo[0] = "n";
+                        echo $foo // выведет next
+
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="" target="_blank">Приведение типов</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        /*
+                            (int), (integer) - приведение к integer
+                            (bool), (boolean) - приведение к boolean
+                            (float), (double), (real) - приведение к float
+                            (string) - приведение к string
+                            (array) - приведение к array
+                        */
+
+                        $foo = '10';
+                        $foo = (int) $foo; // 10
+                        $foo = (array) $foo; // [10]
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+        <section>
+            <h2><a href="" target="_blank">Приведение типов 😨</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        $foo = "1";  // $foo - это строка (ASCII-код 49)
+                        $foo *= 2;   // $foo теперь целое число (2)
+                        $foo = $foo * 1.3;  // $foo теперь число с плавающей точкой (2.6)
+                        $foo = 5 * "10 Little Piggies"; // $foo - это целое число (50)
+                        $foo = 5 * "10 Small Pigs";     // $foo - это целое число (50)
+
+                        12 === 0xC // true , hex число
+                        0 == "0,9" // true
+                        0 == "" // true
+                        "true" == true // true
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.constants.php" target="_blank">Константы</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        define("FOO", "something"); // объявление
+                        const BAR = FOO . " good"; // и это объявление
+
+                        echo FOO; // обращение к константе
+                        // начиная с PHP7 значением константы может быть массив
+
+                        echo __DIR__; //  т.н. <a href="http://php.net/manual/ru/language.constants.predefined.php" target="_blank">магическая константа</a>
+
+                        // <a href="http://php.net/manual/en/math.constants.php">Математические константы</a>
+                        // NAN for not a number
+                        // INF for infinite
+                        // <a href="http://php.net/manual/ru/reserved.constants.php">PHP_VERSION</a>
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Операторы ветвления</h2>
+            <img src="img/vitiaz.jpg">
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/control-structures.elseif.php" target="_blank">If .. else ..</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        If($money > 100) {
+                            $money -= 100;
+                        } elseif ($money > 0) {
+                            $money--;
+                        } else {
+                            $money++
+                        }
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/control-structures.switch.php" target="_blank">Switch</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        if ($page == "home") echo "you are at the home page";
+                        elseif ($page == "login") echo "you are at the login page";
+                        ...
+
+                        switch($page) {
+                            case "home":
+                                echo "you are at the home page";
+                                break;
+                            case "login":
+                                echo "you are at the login page";
+                                break;
+                            case default: ...
+                        }
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.operators.comparison.php" target="_blank">Elvis is alive</a> <a href="http://www.webtipblog.com/wp-content/uploads/2014/04/elvis.jpg" target="_blank">:?</a></h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    &lt;?php
+                        // Тернарный оператор
+
+                        // Пример использования тернарного оператора
+                        $action = $isValid ? 'default' : 'go back';
+
+                        // Приведенный выше код аналогичен следующему блоку с использованием if/else
+                        if ($isValid) {
+                            $action = 'default';
+                        } else {
+                            $action = 'go back';
+                        }
+
+                        $foo = $bar ?: 'default'; // если (bool)$bar == true то $foo === $bar
+                        // иначе - $foo === 'default'
+
+                        // null coalescing in PHP7
+                        $foo = $bar ?? 'default'; // если $bar === null, то $foo === 'default'
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Запуск PHP</h2>
+            <pre class="with-code">
+                <code data-trim data-noescape>
+                    #bash
+
+                    # запустить dev сервер на 8000 порту
+                    php -S localhost:8000
+
+                    # запустить интерактивную консоль
+                    php -a
+
+                    # запустить файл file.php из консоли
+                    php file.php
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>&lt; The End &gt;</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+
+<script>
+
+  // More info https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+    // More info https://github.com/hakimel/reveal.js#dependencies
+    dependencies: [
+      { src: '../vendor/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: '../vendor/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '../vendor/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: '../vendor/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: '../vendor/plugin/zoom-js/zoom.js', async: true },
+      { src: '../vendor/plugin/notes/notes.js', async: true }
+    ]
+  });
+
+</script>
+
+</body>
+</html>

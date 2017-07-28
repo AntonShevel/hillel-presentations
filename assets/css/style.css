@@ -1,0 +1,20 @@
+
+.reveal h1 {
+    font-size: 3.1em;
+}
+
+.reveal pre code{
+    background: transparent;
+}
+
+.reveal pre.with-code{
+    width: 100%;
+}
+
+.reveal a .hljs-comment{
+    text-decoration: underline;
+}
+
+.reveal a:hover .hljs-comment{
+    text-decoration: none;
+}

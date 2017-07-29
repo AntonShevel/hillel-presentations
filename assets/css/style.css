@@ -11,10 +11,12 @@
     width: 100%;
 }
 
-.reveal a .hljs-comment{
+.reveal a .hljs-comment,
+.reveal a .hljs-meta{
     text-decoration: underline;
 }
 
-.reveal a:hover .hljs-comment{
+.reveal a:hover .hljs-comment,
+.reveal a:hover .hljs-meta{
     text-decoration: none;
 }

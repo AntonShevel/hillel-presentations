@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 1</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1><span style="display: inline-block; transform: rotate(270deg);">🐘</span> PHP <span style="display: inline-block; transform: rotate(90deg);">🐘</span></h1>
+            <h3>Урок 4</h3>
+        </section>
+
+        <section>
+            <h2>Внутренний указатель массива (курсор)</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    /*
+                    <a href="http://php.net/manual/ru/function.current.php" target="_blank">current()</a> - Возвращает текущий элемент массива
+                    <a href="http://php.net/manual/ru/function.next.php" target="_blank">next()</a> — Передвигает внутренний указатель массива на одну позицию вперёд
+                    <a href="http://php.net/manual/ru/function.end.php" target="_blank">end()</a> - Устанавливает внутренний указатель массива на его последний элемент
+                    <a href="http://php.net/manual/ru/function.prev.php" target="_blank">prev()</a> - Передвигает внутренний указатель массива на одну позицию назад
+                    <a href="http://php.net/manual/ru/function.reset.php" target="_blank">reset()</a> - Устанавливает внутренний указатель массива на его первый элемент
+                    */
+                    &lt;?php
+                        $foo = [1, 2, 3];
+                        for(reset($foo); $item = current($foo); next($foo)) {
+                            echo $item;
+                        }
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/control-structures.foreach.php" target="_blank">Цикл Foreach</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        $foo = [1, 2, 3];
+
+                        foreach($foo as $item) {
+                            reset($foo) // сломает цикл в PHP5
+                            echo $item; // 123
+                        }
+
+                        foreach($foo as $key => $item)
+                            echo $key, $item, ' '; // 01 12 23
+
+                        foreach($foo as &$item)
+                            $item++;
+
+                        var_dump($foo); // 2, 3, 4
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Многомерные массивы</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        $users = [
+                            [
+                                'first_name' => 'John',
+                                'last_name' => 'MacGregor'
+                            ],
+                            [
+                                'first_name' => 'Michael',
+                                'last_name' => 'Smith'
+                            ]
+                        ];
+
+                        echo $users[0]['first_name']; // John
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/functions.anonymous.php" target="_blank">Анонимные функции</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        $foo = function ($string) {
+                            return strtoupper($string);
+                        }
+
+                        echo $foo('foo'); // FOO
+
+                        $arr = array_map($foo, ["a", "b", "c"]); // [A, B, C]
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/functions.anonymous.php" target="_blank">Замыкания</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // Замыкание – это функция, которая запоминает состояние окружения
+                        // в момент своего содания.
+                        $prefix = "__";
+                        $foo = function ($string) use ($prefix) {
+                            return $prefix . strtoupper($string);
+                        }
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Require / include</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // <a href="http://php.net/manual/ru/function.include.php" target="_blank">include()</a>
+                        // <a href="http://php.net/manual/ru/function.require.php" target="_blank">require()</a>
+                        // <a href="http://php.net/manual/ru/function.include-once.php" target="_blank">include_once()</a>
+                        // <a href="http://php.net/manual/ru/function.require-once.php" target="_blank">require_once()</a>
+                    ?&gt;
+
+                    include('vars.php');
+                    require_once(__ROOT__.'/config.php');
+                </code>
+            </pre>
+        </section>
+        <!-- TODO добавить сортировки, бинарный поиск, рекурсию -->
+
+        <section>
+            <h1>The End ⛄️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 5</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>🐘P🐘H🐘P🐘</h1>
+            <h3>Урок 5</h3>
+        </section>
+
+        <section>
+            <h1>Обработка форм</h1>
+        </section>
+
+        <section>
+            <h2><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Identifying_resources_on_the_Web" target="_blank">URI & URL</a></h2>
+            <p>Uniform Resource Locator and Uniform Resource Identifier</p>
+            <pre class="with-code">
+            <code data-trim data-noescape>
+                <i style="font-size: 150%">http://www.example.com:80/path/to/myfile.html?<br>key1=value1&key2=value2#SomewhereInTheDocument</i><br>
+                <img src="img/protocol.png"><br/>
+                <img src="img/domain.png"><br/>
+                <img src="img/port.png"><br/>
+                <img src="img/path.png"><br/>
+                <img src="img/query.png"><br/>
+                <img src="img/fragment.png"><br/>
+            </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Overview" target="_blank">HTTP Request</a></h2>
+            <img src="img/request.png" alt="HTTP Request">
+        </section>
+
+        <section>
+            <h2><a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Overview" target="_blank">HTTP Response</a></h2>
+            <img src="img/response.png" alt="HTTP Response">
+        </section>
+
+        <section>
+            <h2><a href="https://www.codecademy.com/en/tracks/htmlcss" target="_blank">Простейшая форма</a></h2>
+            <pre class="with-code">
+                <code class="lang-html" data-trim data-noescape>
+                    &lt;!doctype html&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;
+                            &lt;title&gt;Simple form&lt;/title&gt;
+                        &lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;form method="post" action="handler.php"&gt;
+                                &lt;input type="text" name="text"&gt;
+                                &lt;input type="submit" title="Submit"&gt;
+                                &lt;!-- можно еще так --&gt;
+                                &lt;button type="submit"&gt;Submit&lt;/button&gt;
+                            &lt;/form&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://htmlbook.ru/html/form" target="_blank">Элементы форм</a></h2>
+            <pre class="with-code">
+                <code class="lang-html" data-trim data-noescape>
+                    &lt;!doctype html&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;
+                            &lt;title&gt;Simple form&lt;/title&gt;
+                        &lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;!-- текстовые поля --&gt;
+                            &lt;input type="text" name="text" value="12" placeholder="please, enter"&gt;
+                            &lt;textarea name="long_text" cols="30" rows="10"&gt;&lt;/textarea&gt;
+                            &lt;!-- флажок --&gt;
+                            &lt;input type="checkbox" name="aggree" value="20" /&gt;
+                            &lt;!-- переключатель --&gt;
+                            &lt;input type="radio" value="1" name="fruit" checked&gt;
+                            &lt;input type="radio" value="2" name="fruit"&gt;
+                            &lt;!-- скрытое поле --&gt;
+                            &lt;input type="hidden" value="22" name="hide_it"&gt;
+                            &lt;!-- выпадающее меню --&gt;
+                            &lt;select name="vegetable"&gt;
+                              &lt;option value="onion"&gt;Onion&lt;/option&gt;
+                              &lt;option value="potato"&gt;Potato&lt;/option&gt;
+                              &lt;option&gt;Carrot&lt;/option&gt;
+                            &lt;/select&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://developer.mozilla.org/ru/docs/Web/Guide/HTML/%D0%A4%D0%BE%D1%80%D0%BC%D1%8B_%D0%B2_HTML" target="_blank">Элементы форм</a></h2>
+            <pre class="with-code">
+                <code class="lang-html" data-trim data-noescape>
+                    &lt;!doctype html&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;
+                            &lt;title&gt;Simple form&lt;/title&gt;
+                        &lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;!-- метка --&gt;
+                            &lt;label&gt;Mango &lt;input type="radio" value="1" name="fruit" &gt;&lt;/label&gt;
+                            &lt;label for="username"&gt;Username&lt;/label&gt;
+                            &lt;input type="text" id="username"&gt;
+                            &lt;p&gt;Абзац&lt;/p&gt;
+                            &lt;!-- перевод строки --&gt;
+                            &lt;br&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Browser Dev Tools</h2>
+            <h3><a href="https://developers.google.com/web/tools/chrome-devtools/" target="_blank">Chrome Dev Tools</a></h3>
+            <a href="https://www.youtube.com/watch?v=C8Z-N0y6Sqo" target="_blank">Введение в Chrome Dev Tools</a>
+            <img src="img/chrome-dev-tools.png" alt="Chrome Dev Tools">
+        </section>
+
+        <section>
+            <h2>Browser Dev Tools</h2>
+            <h3><a href="https://developer.mozilla.org/ru/docs/Tools" target="_blank">Firefox Dev Tools</a></h3>
+            <img src="img/firefox-dev-tools.png" alt="Firefox Dev Tools">
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/faq.html.php#faq.html.select-multiple" target="_blank">Передача массива из формы</a></h2>
+            <pre class="with-code">
+                <code class="lang-html" data-trim data-noescape>
+                    &lt;!doctype html&gt;
+                    &lt;html&gt;
+                        &lt;head&gt;
+                            &lt;title&gt;Simple form&lt;/title&gt;
+                        &lt;/head&gt;
+                        &lt;body&gt;
+                            &lt;input type="radio" value="mango" name="fruits[]" checked&gt;
+                            &lt;input type="radio" value="orange" name="fruits[]"&gt;
+                            &lt;input type="radio" value="apple" name="fruits[]"&gt;
+                            &lt;input type="radio" value="pear" name="fruits[]"&gt;
+                        &lt;/body&gt;
+                    &lt;/html&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Обработка форм в PHP</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // <a href="http://php.net/manual/ru/language.variables.superglobals.php" target="_blank">суперглобальные переменные</a>
+                        var_dump($_REQUEST);
+                        var_dump($_SERVER);
+                        var_dump($_POST);
+                        var_dump($_GET);
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/control-structures.alternative-syntax.php" target="_blank">Альтернативный синтаксис</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php if ($a == 5): ?&gt;
+                    A is equal to 5
+                    &lt;?php endif; ?&gt;
+
+                    &lt;?=$foo?&gt; &lt;!-- аналогично echo --&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

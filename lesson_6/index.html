@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 6</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 6</h3>
+        </section>
+
+        <section>
+            <section>
+                <h2><a href="http://php.net/manual/ru/ref.strings.php" target="_blank">Некоторые функции для работы со строками</a></h2>
+            </section>
+
+            <section>
+                <pre class="with-code">
+                    <code class="lang-php" data-trim data-noescape>
+                        &lt;?php
+                            $user = 'John';
+                            $apples = 15;
+                            $money = 33.11111;
+
+                            <a href="http://php.net/manual/ru/function.sprintf.php" target="_blank">printf</a>(
+                                "%s has %d apples and %01.2f hryvnias",
+                                $user, $apples, $money
+                            );
+
+                            // выведет "John has 15 apples and 33.11 hryvnias"
+                            // printf - выводит строку, sprintf - возвращает ее
+                        ?&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <pre class="with-code">
+                    <code class="lang-php" data-trim data-noescape>
+                        &lt;?php
+                            trim(' some text with spaces  ');
+                            // вернет "some text with spaces" без пробелов по краям
+
+                            <a href="http://php.net/manual/ru/function.htmlentities.php" target="_blank">htmlentities</a>("&lt;html&gt;hello&lt;/html&gt;");
+                            // заменит все символы, которые участвуют в html-разметке
+                            // вернет "&lt;html&gt;hello&lt;/html&gt;"
+
+                            <a href="http://php.net/manual/ru/function.explode.php" target="_blank">explode</a>(" ", "some good string");
+                            // вернет массив из элементов строки
+                            // ["some", "good", "string"]
+                        ?&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <pre class="with-code">
+                    <code class="lang-php" data-trim data-noescape>
+                        &lt;?php
+                            <a href="http://php.net/manual/ru/function.strpos.php" target="_blank">strpos</a>("string", "g");
+                            // вернет 5
+                            // находит позицию подстроки в строке
+
+                            strpos("string", "s"); // вернет 0
+                            strpos("string", "s") == false
+                            // внимание! условие истинно
+
+                            // получить подстроку
+                            $rest = <a href="http://php.net/manual/ru/function.substr.php" target="_blank">substr</a>("abcdef", -1);    // возвращает "f"
+                            $rest = substr("abcdef", 0, -1);  // возвращает "abcde"
+                            $rest = substr('abcdef', 1, 3);  // bcd
+                        ?&gt;
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h2><a href="http://php.net/manual/ru/ref.array.php" target="_blank">Некоторые функции для работы со массивами</a></h2>
+            </section>
+
+            <section>
+                <pre class="with-code">
+                    <code class="lang-php" data-trim data-noescape>
+                        &lt;?php
+                            $array = [5, 2, 1, 3];
+                            <a href="http://php.net/manual/ru/function.sort.php" target="_blank">sort</a>($array); // отсортирует массив
+                            // $array == [1, 2, 3, 5]
+                            <a href="http://php.net/manual/ru/function.shuffle.php">shuffle</a>($array); // перемешает массив $array случайным образом
+
+                            <a href="http://php.net/manual/ru/function.implode.php" target="_blank">implode</a>(", ", ['Hey', 'Arnold!']);
+                            // объединение элементов массива в строку
+                            // вернет "Hey, Arnold!"
+                        ?&gt;
+                    </code>
+                </pre>
+            </section>
+
+            <section>
+                <pre class="with-code">
+                    <code class="lang-php" data-trim data-noescape>
+                        &lt;?php
+                            $array = [];
+                            <a href="http://php.net/manual/ru/function.array-push.php" target="_blank">array_push</a>($array, 1, 2, 3);
+                            // добавить один или несколько элементов в конец массива
+                            // $array == [1, 2, 3]
+
+                            $foo = <a href="http://php.net/manual/ru/function.array-pop.php" target="_blank">array_pop</a>($array);
+                            // извлечет последний элемент массива
+                            // $array == [1, 2]
+
+                            <a href="http://php.net/manual/ru/function.array-search.php" target="_blank">array_search</a>(2, $array, true);
+                            // поиск элемента в массиве. вернет его ключ
+
+                            $assocArray = ["first" => 1, "second" => 2];
+                            <a href="http://php.net/manual/ru/function.array-keys.php" target="_blank">array_keys</a>($assocArray); // вернет ["first", "second"];
+                            array_keys($assocArray, 2, true); // вернет ["second"]
+                            array_values($assocArray); // вернет [1, 2]
+                        ?&gt;
+                    </code>
+                </pre>
+            </section>
+        </section>
+
+        <section>
+            <h2>Сериализация переменных</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        $array = [1, 2 , 3, 'four', []];
+                        $string = <a href="http://php.net/manual/ru/function.serialize.php" target="_blank">serialize</a>($array);
+                        // упаковать в строку
+                        // результат: "a:5:{i:0;i:1;i:1;i:2;i:2;i:3;i:3;s:4:"four";i:4;a:0:{}}"
+
+                        $array1 = <a href="http://php.net/manual/ru/function.unserialize.php" target="_blank">unserialize</a>($string);
+                        // преобразовать строку в исходную переменную
+                        // $array == $array1 будет истинно
+                    ?&gt;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

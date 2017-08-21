@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 6</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 7</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.php" target="_blank">Объекты и классы</a></h2>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.basic.php" target="_blank">Объявление класса</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            public $name;
+                            public $email;
+
+                            public function sayHello()
+                            {
+                                echo "Hello";
+                            }
+                        }
+
+                        $user = new User();
+                        print_r($user);
+                        /*
+                            User Object
+                            (
+                                [name] =>
+                                [email] =>
+                            )
+                        */
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.basic.php" target="_blank">Создание объекта</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // $user1 содержит экземпляр класса User
+                        // instance of class User
+                        $user1 = new User();
+                        $user2 = new User();
+
+                        var_dump($user1 === $user2); // false
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.properties.php" target="_blank">Свойства класса</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            // свойства класса
+                            public $name;
+                            public $email;
+
+                            public function sayHello()
+                            {
+                                echo "Hello";
+                            }
+                        }
+
+                        $user = new User();
+                        // присвоение значений свойствам
+                        $user->name = 'Afanasy';
+                        $user->email = 'afa@nas.com';
+
+                        print_r($user);
+                        /*
+                            User Object
+                            (
+                                [name] => Afanasy
+                                [email] => afa@nas.com
+                            )
+                        */
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.basic.php" target="_blank">Доступ к методам</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            public $name;
+                            public $email;
+
+                            // метод класса
+                            public function sayHello()
+                            {
+                                echo "Hello";
+                            }
+                        }
+
+                        $user = new User();
+                        $user->sayHello(); // Hello
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.basic.php" target="_blank">$this</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            public $firstName;
+                            public $lastName;
+
+                            public function sayName()
+                            {
+                                echo $this->firstName . ' ' $this->lastName;
+                            }
+                        }
+
+                        $user = new User();
+                        $user->firstName = 'John';
+                        $user->lastName = 'Snow';
+
+                        $user->sayName(); // John Snow
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.decon.php" target="_blank">Инициализация</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            public $firstName;
+                            public $lastName;
+
+                            public function __construct($firstName, $lastName)
+                            {
+                                $this->firstName = $firstName;
+                                $this->lastName = $lastName;
+                            }
+
+                            public function __toString()
+                            {
+                                echo $this->firstName . ' ' $this->lastName;
+                            }
+                        }
+
+                        $user = new User('John', 'Snow');
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.visibility.php" target="_blank">Модификаторы доступа</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class User
+                        {
+                            public $name;
+                            private $password;
+                            protected $email;
+                        }
+
+                        $user = new User();
+
+                        $user->name = 'foo';
+                        $user->foo = 'foo'; // неявное объявление свойств
+                        $user->password = 'foo'; // error
+                        $user->email = 'foo'; // error
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.inheritance.php" target="_blank">Наследование</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        class Father
+                        {
+                            public function say()
+                            {
+                                echo "I'm your father";
+                            }
+                        }
+
+                        class Son extends Father
+                        {
+                            public function say()
+                            {
+                                echo "Nooooo!";
+                            }
+                        }
+
+                        $father = new Father();
+                        $son = new Son();
+
+                        $father->say(); // I'm your father
+                        $son->say(); // Nooooo!
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

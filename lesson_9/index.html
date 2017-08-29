@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 9</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 9️⃣</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.php" target="_blank">Объекты и классы</a></h2>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.abstract.php" target="_blank">Абстрактные классы</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        abstract class AbstractPage
+                        {
+                          abstract public function render();
+                        }
+
+
+                        class MainPage extends AbstractPage
+                        {
+                          private $title;
+
+                          public function __construct($title)
+                          {
+                            $this->title = $title;
+                          }
+
+                          public function render()
+                          {
+                            echo "&lt;h1&gt;{$this->title}&lt;/h1&gt;";
+                          }
+                        }
+
+                        $page = new MainPage("Good Page");
+                        $page->render();
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.interfaces.php" target="_blank">Интерфейсы</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        interface RenderInterface
+                        {
+                          public function render();
+                        }
+
+                        interface PrintInterface
+                        {
+                          public function print();
+                        }
+
+                        interface PageInterface extends RenderInterface, PrintInterface
+                        {
+                          const COPY_RIGHT = 'Licensed by ...';
+                        }
+
+                        class Page implements PageInterface
+                        // class Page implements RenderInterface, PrintInterface
+                        {
+                          const COPY_RIGHT = 'Free for all';
+
+                          public function render()
+                          {
+                            echo "&lt;h1&gt;Page&lt;/h1&gt;";
+                          }
+
+                          public function print()
+                          {
+                            echo "Page" . PHP_EOL;
+                          }
+                        }
+
+
+                        $page = new Page();
+                        $page->render();
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1><a href="http://php.net/manual/ru/language.errors.php7.php" target="_blank">Обработка ошибок</a></h1>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.exceptions.php" target="_blank">Исключения</a></h2>
+
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                    function testException()
+                    {
+                      class MyException extends Exception {}
+
+                      try{
+                        // return false;
+                        throw new Exception('Something happened');
+                      } catch(Exception | MyException $e) {
+                        echo $e->getMessage();
+                      } finally {
+                        echo 'Will work in any cases';
+                      }
+                    }
+
+                    testException();
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.errors.php7.php" target="_blank">Иерархия</a></h2>
+
+            <ul>
+                <li>
+                    <span><a href="http://php.net/manual/ru/class.throwable.php" target="_blank">Throwable</a></span>
+                    <ul>
+                        <li>
+                            <span><a href="http://php.net/manual/ru/class.error.php" target="_blank">Error</a></span>
+                            <ul>
+                                <li>
+                                    <span><strong>ArithmeticError</strong></span>
+                                    <ul>
+                                        <li>
+                                            <span><strong>DivisionByZeroError</strong></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <span><strong>AssertionError</strong></span>
+                                </li>
+                                <li>
+                                    <span><strong>ParseError</strong></span>
+                                </li>
+                                <li>
+                                    <span><strong>TypeError</strong></span>
+                                    <ul>
+                                        <li>
+                                            <span><a href="http://php.net/manual/ru/class.argumentcounterror.php" target="_blank">ArgumentCountError</a></span>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span><a href="http://php.net/manual/ru/class.exception.php"  target="_blank">Exception</a></span>
+                            <ul>
+                                <li>
+                                    <span>...</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ошибка != исключение 😵</h2>
+            <p><a href="http://php.net/manual/ru/errorfunc.constants.php" target="_blank">Типы ошибок</a></p>
+            <p><a href="http://php.net/manual/ru/errorfunc.configuration.php#ini.error-reporting" target="_blank">Управление выводом ошибок</a></p>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                    error_reporting (E_STRICT);
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.errorfunc.php" target="_blank">Обработка ошибок</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                    error_reporting (E_STRICT);
+
+                    set_error_handler(function($number, $string, $file, $line) {
+                      echo "Some error happened: $number $string in $file on line $line \n";
+                    });
+
+                    $file = fopen("foo", "r");
+                    $file1 = @fopen("foo1", "r"); // <a href="http://php.net/manual/ru/language.operators.errorcontrol.php" target="_blank">игнорировать ошибки</a>
+
+                    set_exception_handler(function($e) {
+                      echo "Exception was thrown: {$e->getMessage()} in {$e->getFile()} on line {$e->getLine()} \n";
+                    });
+
+                    throw new Exception("Something wrong");
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️🐘</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

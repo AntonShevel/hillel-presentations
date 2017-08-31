@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 10</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 10🎉</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.types.resource.php" target="_blank">Тип данных - ресурс</a></h2>
+            <p>Resource это специальная переменная, содержащая ссылку на внешний ресурс</p>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.filesystem.php" target="_blank">Создать файл</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        file_exists("filename.txt"); // проверит, существует ли файл
+
+                        $handle = fopen("filename.txt", "w"); // открыть файл, создаст новый, если он не существует
+                        /*
+                        fopen поддерживает <a href="http://php.net/manual/ru/function.fopen.php" target="_blank">раличные режимы</a>
+                            r - чтение
+                            w - перезапись
+                            a - дописать к файлу
+                            etc.
+                        */
+
+                        fclose($handle); // закрыть файл
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.filesystem.php" target="_blank">Чтение из файла</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        $handle = fopen("filename.txt", "r");
+
+                        while (($buffer = fgets($handle, 4096)) !== false) {
+                            echo $buffer; // построчное чтение файла
+                        }
+
+                        $contents = fread($handle, filesize($filename)); // записать содержимое всего файла в строку
+                        $contents = file_get_contents("filename.txt"); // или так :)
+                        fclose($handle); // закрыть файл
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.filesystem.php" target="_blank">Запись в файла</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        $handle = fopen("filename.txt", "r+");
+
+                        fseek($handle, 0, SEEK_END); // переместить указатель в конец файла
+                        fwrite($handle, "some good text");
+
+                        fclose($handle); // закрыть файл
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.filesystem.php" target="_blank">Блокировка файла</a></h2>
+            <p>для совместного доступа</p>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        $handle = fopen("/tmp/lock.txt", "r+");
+
+                        if (flock($handle, LOCK_EX)) { // выполняем эксклюзивную блокировку
+                            ftruncate($handle, 0); // очищаем файл
+                            fwrite($handle, "Что-нибудь пишем сюда\n");
+                            flock($handle, LOCK_UN); // снимаем блокировку
+                        } else {
+                            echo "Не удалось получить блокировку!";
+                        }
+
+                        fclose($handle);
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/function.readdir.php" target="_blank">Работа с каталогами</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        is_dir("path"); // проверить, является ли каталогом указанный путь
+                        scandir("path"); // получить список всех файлов и каталогов по указанному пути
+
+                        if ($handle = opendir('/path/to/files')) { // вернет ресурс каталога
+
+                            while (false !== ($entry = readdir($handle))) {
+                                echo "$entry\n"; // последовательный обход всех элементов директории и вывод
+                            }
+
+                            closedir($handle);
+                        }
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️🐘</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

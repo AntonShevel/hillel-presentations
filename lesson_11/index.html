@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 11</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 11</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://www.phptherightway.com/#databases" target="_blank">Работа с Базами данных</a></h2>
+        </section>
+
+        <section>
+            <h2>Mysql Cli tool</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    mysql -u root -p  -- зайти под пользователем root
+                    show databases; -- список баз данных
+                    create database Test; -- создать новую базу
+                    use Test; -- подключиться к базе
+                    show tables; -- показать список таблиц в БД
+                    CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20),
+                        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+                        -- создать таблицу
+                    describe pets; -- посмотреть информацию о таблице
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Postgres Cli tool</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    createdb test -- создать новую базу
+                    psql test -- подключиться к базе
+                    \l -- список баз данных
+                    \dt -- показать список таблиц в БД
+                    CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20),
+                        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+                        -- создать таблицу
+                    \d pets -- посмотреть информацию о таблице
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Создание таблицы</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    CREATE TABLE table_name(
+                       column1 datatype,
+                       column2 datatype,
+                       column3 datatype,
+                       .....
+                       columnN datatype,
+                       PRIMARY KEY( one or more columns )
+                    );
+
+                    CREATE TABLE pets (name VARCHAR(20), owner VARCHAR(20),
+                        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Добавление записи</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    INSERT INTO TABLE_NAME (column1, column2, column3)
+                        VALUES (value1, value2, value3);
+
+                    INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+                        VALUES (3, 'Ivan', 23, 'New-York', 2000.00 );
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Поиск записей</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    SELECT column1, column2, column3
+                    FROM table_name
+                    WHERE condition;
+
+                    SELECT * FROM table_name;
+                    SELECT * FROM сustomers WHERE country='Mexico';
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Обновление записей</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    UPDATE table_name
+                    SET column1 = value1, column2 = value2
+                    WHERE condition;
+
+                    UPDATE customers
+                    SET contact_name = 'Alfred Schmidt', city= 'Frankfurt'
+                    WHERE customer_id = 1;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Удаление записей</h2>
+            <pre class="with-code">
+                <code class="lang-sql" data-trim data-noescape>
+                    DELETE FROM table_name
+                    WHERE condition;
+
+                    DELETE FROM customers
+                    WHERE contact_name='Alfred Schmidt';
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://wiki.hashphp.org/PDO_Tutorial_for_MySQL_Developers" target="_blank">Работа с БД в PHP</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                    $options = [
+                        PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+                    ]; // настройки можно передать в конструктор четвертым аргументом
+                    $db = new PDO('pgsql:dbname=test;host=localhost;', 'zerg', 'xxxxx');
+                    // подклчение к Postgres
+                    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    // настройки можно изменить и после создания экземляра PDO
+                    $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
+                    // подключение к Mysql
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/book.pdo" target="_blank">Работа с БД в PHP</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        $statement = $db->query('SELECT * FROM pets'); // подготавливаем запрос
+                        $statement->rowCount(); // список строк
+                        $row = $statement->fetch(PDO::FETCH_ASSOC);
+                        var_dump($row);
+                        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+                        var_dump($rows);
+
+                        $affected_rows = $db->exec("UPDATE table SET field='value'");
+                        echo $affected_rows.' were affected';
+
+                        $stmt = $db->prepare("SELECT * FROM table WHERE id=? AND name=?");
+                        // подготовленнео выражение
+                        $stmt->execute(array($id, $name)); // пыполнить и подставить значения
+                        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // получить все строки
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️🐘</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

@@ -76,7 +76,7 @@
         </section>
 
         <section>
-            <h2>Создание таблицы</h2>
+            <h2><a href="http://www.spravkaweb.ru/mysql/sql/create_table" target="_blank">Создание таблицы</a></h2>
             <pre class="with-code">
                 <code class="lang-sql" data-trim data-noescape>
                     CREATE TABLE table_name(
@@ -95,7 +95,7 @@
         </section>
 
         <section>
-            <h2>Добавление записи</h2>
+            <h2><a href="http://www.spravkaweb.ru/mysql/sql/insert" target="_blank">Добавление записи</a></h2>
             <pre class="with-code">
                 <code class="lang-sql" data-trim data-noescape>
                     INSERT INTO TABLE_NAME (column1, column2, column3)
@@ -108,7 +108,7 @@
         </section>
 
         <section>
-            <h2>Поиск записей</h2>
+            <h2><a href="http://www.spravkaweb.ru/mysql/sql/select" target="_blank">Поиск записей</a></h2>
             <pre class="with-code">
                 <code class="lang-sql" data-trim data-noescape>
                     SELECT column1, column2, column3
@@ -122,7 +122,7 @@
         </section>
 
         <section>
-            <h2>Обновление записей</h2>
+            <h2><a href="http://www.spravkaweb.ru/mysql/sql/update" target="_blank">Обновление записей</a></h2>
             <pre class="with-code">
                 <code class="lang-sql" data-trim data-noescape>
                     UPDATE table_name
@@ -137,7 +137,7 @@
         </section>
 
         <section>
-            <h2>Удаление записей</h2>
+            <h2><a href="http://www.spravkaweb.ru/mysql/sql/delete" target="_blank">Удаление записей</a></h2>
             <pre class="with-code">
                 <code class="lang-sql" data-trim data-noescape>
                     DELETE FROM table_name
@@ -165,7 +165,6 @@
                     // настройки можно изменить и после создания экземляра PDO
                     $db = new PDO('mysql:host=localhost;dbname=test', 'root', '');
                     // подключение к Mysql
-
                 </code>
             </pre>
         </section>
@@ -188,7 +187,7 @@
 
                         $stmt = $db->prepare("SELECT * FROM table WHERE id=? AND name=?");
                         // подготовленнео выражение
-                        $stmt->execute(array($id, $name)); // пыполнить и подставить значения
+                        $stmt->execute([$id, $name]); // выполнить и подставить значения
                         $rows = $stmt->fetchAll(PDO::FETCH_ASSOC); // получить все строки
                 </code>
             </pre>

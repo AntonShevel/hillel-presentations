@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 13</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 13👀</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/features.cookies.php" target="_blank">Cookies!</a></h2>
+            <img src="img/vaider.jpg">
+        </section>
+
+        <section>
+            <h2><a href="https://code.tutsplus.com/tutorials/an-introduction-to-cookies--net-12482" target="_blank">Cookies</a></h2>
+            <img src="img/cookies.png" width="200%">
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/function.setcookie.php" target="_blank">Cookies в PHP</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        $name = 'TEST_COOKIE';
+                        $value = 'some value';
+                        $expire = time() + (86400 * 30); // на 30 дней
+                        // если $expire = 0 то cookie будет жить до закрытия браузера
+                        $path = '/'; // по какому адресу будет доступна
+
+                        // создать cookie
+                        setcookie($name, $value, $expire, $path);
+
+                        // удалить cookie
+                        setcookie($name, $value, time() - 3600, $path);
+
+                        // получение доступа к cookies
+                        var_dump($_COOKIE);
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://habrahabr.ru/company/dataart/blog/262817/" target="_blank">HTTP Аутентификация</a></h2>
+            <img src="img/basic_auth.png" width="200%">
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/features.http-auth.php" target="_blank">HTTP Аутентификация в PHP</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+                            header('WWW-Authenticate: Basic realm="My Realm"');
+                            header('HTTP/1.0 401 Unauthorized');
+                            echo 'Text to send if user hits Cancel button';
+                            exit;
+                        } else {
+                            echo "Hello {$_SERVER['PHP_AUTH_USER']}. ";
+                            echo "You entered {$_SERVER['PHP_AUTH_PW']} as your password.";
+                        }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/book.session.php" target="_blank">Сессии</a></h2>
+            <img src="img/session.gif" width="100%">
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/session.examples.basic.php" target="_blank">Сессии в PHP</a></h2>
+            <a href="http://php.net/manual/ru/features.session.security.management.php" target="_blank">Базовые принципы управления сессиями</a>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        session_start();
+
+                        if (empty($_SESSION['count'])) {
+                           $_SESSION['count'] = 1;
+                        } else {
+                           $_SESSION['count']++;
+                        }
+
+                        var_dump($_SESSION);
+
+                        // если пользователь хочет завершить сеанс (выйти)
+                        // session_destroy();
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

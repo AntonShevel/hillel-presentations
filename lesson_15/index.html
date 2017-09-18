@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 14</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 15👾</h3>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.oop5.autoload.php" target="_blank">Автозагрузка классов</a></h2>
+            <a style="font-size: 50%" href="https://victor.4devs.io/ru/php/classes-autoload-php.html" target="_blank">Механизм автозагрузки классов в PHP;</a>
+            <a style="font-size: 50%" href="https://habrahabr.ru/post/136761/" target="_blank">Автозагрузка классов в PHP с использованием SPL;</a><br>
+            <a style="font-size: 50%" href="http://codengineering.ru/post/28" target="_blank">Все об автозагрузке в PHP</a>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        //Сначала убедимся, что в стеке автозагрузки не зарегистрировано ниодной функции
+                        var_dump(spl_autoload_functions());
+
+                        spl_autoload_register(function ($class) {
+                            // Получаем путь к файлу из имени класса
+                            $path = __DIR__ . $class . '.php';
+                            // Если в текущей папке есть такой файл, то выполняем код из него
+                            if (file_exists($path)) {
+                                require_once $path;
+                            }
+                            // Если файла нет, то ничего не делаем - может быть, класс
+                            // загрузит какой-то другой автозагрузчик или может быть,
+                            // такого класса нет
+                        });
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.namespaces.php" target="_blank">Пространства имён<br/>Namespaces</a></h2>
+            <a style="font-size: 50%" href="https://github.com/codedokode/pasta/blob/master/php/autoload.md" target="_blank">Автозагрузка, неймспейсы и PSR-4</a>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // namespace \MegaLibrary\Database;
+
+                        const CONNECT_OK = 1;
+
+                        // этот класс получит полное имя \MegaLibrary\Database\Connection
+                        class Connection { /* ... */ }
+
+                        function connect() { /* ... */  }
+
+                        // PHP попытается создать объект класса \MegaLibrary\Database\SomeClass
+                        $x = new SomeClass;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.namespaces.importing.php" target="_blank">Пространства имён</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+                        // Объявляем, что имя User будет обозначать класс \Some\Library\User
+                        use \Some\Library\User;
+                        // Объявляем, что имя OtherUser будет обозначать класс \Other\User
+                        use \Other\User as OtherUser;
+
+                        // Пространства имен применимы не только к классам,
+                        // но и к функциям, константам
+                        use function \MyProject\connect;
+                        use const \MyProject\CONNECT_OK as CONNECT;
+
+                        $user1 = new User;
+                        $user2 = new OtherUser;
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.namespaces.importing.php" target="_blank">Пространства имён</a></h2>
+            <q style="font-size: 60%">Ключевое слово use должно быть указано в самом начале файла (в глобальной области) или внутри объявления пространства имен. Это необходимо потому, что импорт выполняется во время компиляции, а не во время исполнения, поэтому оно не может быть заключено в блок. </q>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        // Код до PHP 7
+                        use some\namespace\ClassA;
+                        use some\namespace\ClassB;
+                        use some\namespace\ClassC as C;
+
+                        // Код на PHP 7+
+                        use some\namespace\{ClassA, ClassB, ClassC as C};
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://www.php-fig.org/" target="_blank">PHP-FIG стандарты</a></h2>
+            <q style="font-size: 90%">PSR - PHP standards recommendation</q>
+            <ul>
+                <li><a href="http://www.php-fig.org/psr/psr-1/" target="_blank">PSR-1: Basic code style</a></li>
+                <li><a href="http://www.php-fig.org/psr/psr-2/" target="_blank">PSR-2: Strict code style</a></li>
+                <li><a href="http://www.php-fig.org/psr/psr-3/" target="_blank">PSR-3: Logger interface</a></li>
+                <li><a href="http://www.php-fig.org/psr/psr-4/" target="_blank">PSR-4: Autoloading</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2><a href="https://getcomposer.org/doc/01-basic-usage.md" target="_blank">Composer</a></h2>
+            <a style="font-size: 50%" href="https://habrahabr.ru/post/145946/" target="_blank">Composer — менеджер зависимостей для PHP;</a>
+            <a style="font-size: 50%" href="https://habrahabr.ru/post/258891/" target="_blank">Освоение Composer: советы и приемы использования;</a>
+            <a style="font-size: 50%" href="http://phpprofi.ru/blogs/post/52" target="_blank">Composer: Шпаргалка команд;</a>
+            <a style="font-size: 50%" href="http://codinghamster.info/php/stability-paketov-v-composer-problemy-i-reshenia/" target="_blank">Стабильность пакетов в Сomposer;</a>
+            <pre class="with-code">
+                <code class="json" data-trim data-noescape>
+                    {
+                        "require": {
+                            "monolog/monolog": "1.0.*"
+                        }
+                    }
+                </code>
+            </pre>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    composer install
+                    php composer.phar require vendor/package:2.*
+                    php composer.phar update vendor/package
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://getcomposer.org/doc/01-basic-usage.md" target="_blank">Composer and autoload</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    &lt;?php
+
+                        require __DIR__ . '/vendor/autoload.php';
+
+                        $log = new Monolog\Logger('name');
+                        $log->pushHandler(new Monolog\Handler\StreamHandler('app.log', Monolog\Logger::WARNING));
+                        $log->addWarning('Foo');
+
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End😼😼️️</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

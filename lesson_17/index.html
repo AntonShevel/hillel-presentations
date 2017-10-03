@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 17</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 1️⃣7️⃣ </h3>
+        </section>
+
+        <section>
+            <h2><a href="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA" target="_blank">Фреймворк</a></h2>
+            <blockquote cite="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA">
+                Фреймворк — программная платформа, определяющая структуру программной системы; программное обеспечение, облегчающее разработку и объединение разных компонентов большого программного проекта.
+            </blockquote>
+        </section>
+
+        <section>
+            <h2><a href="https://habrahabr.ru/post/116232/" target="_blank">Инверсия управления</a></h2>
+            <p>Inversion of control (IoC)</p>
+            <img src="img/ioc.png" width="80%" alt="Inversion of control">
+        </section>
+
+        <section>
+            <h2><a href="https://github.com/codedokode/pasta/blob/master/arch/mvc.md" target="_blank">MVC</a></h2>
+            <p>Model-View-Controller</p>
+            <img src="img/mvc.png" alt="Model-View-Controller" width="80%">
+        </section>
+
+        <section>
+            <h2><a href="https://github.com/codedokode/pasta/blob/master/arch/mvc.md" target="_blank">MVC</a></h2>
+            <img src="img/components.jpg" alt="Model-View-Controller components" width="80%">
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.com/docs/5.5/installation" target="_blank">Установка Laravel</a></h2>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    # установим Laravel-installer
+                    composer global require "laravel/installer"
+
+                    # создаем новый проект guest-book
+                    laravel new guest-book
+
+                    # запускаем сервер
+                    php artisan serve
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.ru/docs/v5/migrations" target="_blank">Миграции</a></h2>
+            <img src="img/migration.jpg" alt="Migrations">
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.ru/docs/v5/artisan" target="_blank">Artisan</a></h2>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    # посмотреть список команд
+                    php artisan
+
+                    # создать новую миграцию AddPostsTable
+                    php artisan make:migration add_posts_table
+
+                    # заполнить базу тестовыми данными
+                    # (выполнит код из database/seeds)
+                    php artisan db:seed
+
+                    # выполнить миграции
+                    php artisan migrate
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.ru/docs/v5/structure" target="_blank">Структура проекта</a></h2>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    # контроллеры
+                    app/Http/Controllers/
+
+                    # по умолчанию модели находятся в
+                    app/
+
+                    # роутинг, привязка контроллеров к ресурсам
+                    # (выполнит код из database/seeds)
+                    routes/
+
+                    # шаблоны blade
+                    resources/views/
+
+                    # файлы миграций, генерация тестовых данных
+                    database/migrations/
+                    database/seeds/
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://git-scm.com/book/ru/" target="_blank">Снова GIT ☺️</a></h2>
+            <p>Пример локального использования</p>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    # создать пустой репозиторий
+                    git init
+                    # добать все файлы, которые есть в проекте
+                    git add .
+                    # создаем первый коммит с комментарием Initial commit
+                    git commit -m'Initial commit'
+                    # делаем какое-то изменение в README.md
+                    # смотрим, что было изменено
+                    git diff
+                    # смотрим, какие файлы были изменены
+                    git status
+                    # выбираем файлы, которые попадут в коммит
+                    git add README.md
+                    # создаем новый коммит
+                    git commit -m'Update readme'
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End😼</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

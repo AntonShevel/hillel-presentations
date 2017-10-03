@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Hillel PHP course Lesson 16</title>
+    <title>Hillel PHP course Lesson 17</title>
 
     <meta name="description" content="">
     <meta name="author" content="Anton Shevel">
@@ -35,121 +35,47 @@
     <div class="slides">
         <section>
             <h1>PHP</h1>
-            <h3>Урок 16 🐘</h3>
+            <h3>Урок 1️⃣7️⃣ </h3>
         </section>
 
         <section>
-            <h2><a href="http://php.net/manual/ru/language.oop5.traits.php" target="_blank">Traits/Трейты</a></h2>
-            <pre class="with-code">
-                <code class="lang-php" data-trim data-noescape>
-                    &lt;?php
-                        trait MyTrait {
-                            // Trait implementation goes here
-                        }
+            <h2><a href="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA" target="_blank">Фреймворк</a></h2>
+            <blockquote cite="https://ru.wikipedia.org/wiki/%D0%A4%D1%80%D0%B5%D0%B9%D0%BC%D0%B2%D0%BE%D1%80%D0%BA">
+                Фреймворк — программная платформа, определяющая структуру программной системы; программное обеспечение, облегчающее разработку и объединение разных компонентов большого программного проекта.
+            </blockquote>
+        </section>
 
-                        class MyClass {
-                            // Для импорта трейтов используется use, так же, как и для классов
-                            use MyTrait;
-                            // Class implementation goes here
-                        }
+        <section>
+            <h2><a href="https://habrahabr.ru/post/116232/" target="_blank">Инверсия управления</a></h2>
+            <p>Inversion of control (IoC)</p>
+            <img src="img/ioc.png" width="80%" alt="Inversion of control">
+        </section>
+
+        <section>
+            <h2><a href="https://github.com/codedokode/pasta/blob/master/arch/mvc.md" target="_blank">MVC</a></h2>
+            <p>Model-View-Controller</p>
+            <img src="img/mvc.png" alt="Model-View-Controller" width="80%">
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.com/docs/5.5/installation" target="_blank">Установка Laravel</a></h2>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                    # установим Laravel-installer
+                    composer global require "laravel/installer"
+
+                    # создаем новый проект guest-book
+                    laravel new guest-book
+
+                    # запускаем сервер
+                    php artisan serve
                 </code>
             </pre>
         </section>
 
         <section>
-            <h2><a href="http://php.net/manual/ru/language.oop5.traits.php" target="_blank">Трейты. Приоритет</a></h2>
-            <pre class="with-code">
-                <code class="lang-php" data-trim data-noescape>
-                    &lt;?php
-                        /* Порядок приоритета такой: методы из текущего класса переопределяют методы трейта,
-                        которые в свою очередь переопределяют методы из базового класса. */
-                        class Base {
-                            public function sayHello() {
-                                echo 'Hello ';
-                            }
-                        }
-
-                        trait SayWorld {
-                            public function sayHello() {
-                                parent::sayHello();
-                                echo 'World!';
-                            }
-                        }
-
-                        class MyHelloWorld extends Base {
-                            use SayWorld;
-                        }
-
-                        $o = new MyHelloWorld();
-                        $o->sayHello();
-                </code>
-            </pre>
-        </section>
-
-        <section>
-            <h2><a href="http://php.net/manual/ru/language.oop5.traits.php" target="_blank">Трейты. Конфликты</a></h2>
-            <pre class="with-code">
-                <code class="lang-php" data-trim data-noescape>
-                    &lt;?php
-                        trait A {
-                            public function smallTalk() {
-                                echo 'a';
-                            }
-                            public function bigTalk() {
-                                echo 'A';
-                            }
-                        }
-
-                        trait B {
-                            public function smallTalk() {
-                                echo 'b';
-                            }
-                            public function bigTalk() {
-                                echo 'B';
-                            }
-                        }
-
-                        class Talker {
-                            use A, B {
-                                B::smallTalk insteadof A;
-                                A::bigTalk insteadof B;
-                            }
-                        }
-
-                        class Aliased_Talker {
-                            use A, B {
-                                B::smallTalk insteadof A;
-                                A::bigTalk insteadof B;
-                                B::bigTalk as talk;
-                            }
-                        }
-                </code>
-            </pre>
-        </section>
-
-        <section>
-            <h2><a href="http://php.net/manual/ru/language.oop5.traits.php" target="_blank">Трейты. Видимость</a></h2>
-            <pre class="with-code">
-                <code class="lang-php" data-trim data-noescape>
-                    &lt;?php
-                        trait HelloWorld {
-                            public function sayHello() {
-                                echo 'Hello World!';
-                            }
-                        }
-
-                        // Изменение видимости класса sayHello
-                        class MyClass1 {
-                            use HelloWorld { sayHello as protected; }
-                        }
-
-                        // Создание псевдонима метода с измененной видимостью
-                        // видимость sayHello не изменилась
-                        class MyClass2 {
-                            use HelloWorld { sayHello as private myPrivateHello; }
-                        }
-                </code>
-            </pre>
+            <h2><a href="https://laravel.ru/docs/v5/migrations" target="_blank">Миграции</a></h2>
+            <img src="img/migration.jpg" alt="Migrations">
         </section>
 
         <section>
@@ -233,26 +159,7 @@
             <p>The PHP interpreter copies and pastes traits into class definitions at compile time, and it does not protect against incompatibilities introduced by this action. If your PHP trait assumes a class prop‐ erty or method exists (that is not defined in the trait itself), be sure those properties and methods exist in the appropriate classes.</p>
         </section>
 
-        <section>
-            <h2><a href="https://getcomposer.org/doc/00-intro.md" target="_blank">Composer. Установка</a></h2>
-            Локально (composer.phar)
-            <pre class="with-code">
-                <code class="lang-bash" data-trim data-noescape>
-                    php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-                    php -r "if (hash_file('SHA384', 'composer-setup.php') === '544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-                    php composer-setup.php
-                    php -r "unlink('composer-setup.php');"
-                </code>
-            </pre>
-            Глобально
-            <pre class="with-code">
-                <code class="lang-bash" data-trim data-noescape>
-                    php composer-setup.php --install-dir=bin --filename=composer
-                    or
-                    mv composer.phar /usr/local/bin/composer
-                </code>
-            </pre>
-        </section>
+
 
         <section>
             <h2><a href="https://getcomposer.org/doc/02-libraries.md" target="_blank">composer.json</a></h2>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 20</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок <u>20</u></h3>
+        </section>
+
+        <section>
+            <h1>Eloquent...</h1>
+        </section>
+
+        <section>
+            <h2><a href="https://ru.wikipedia.org/wiki/ORM" target="_blank">ORM</a></h2>
+            <p>Object-Relational Mapping / объектно-реляционное отображение</p>
+            <p>технология программирования, которая связывает базы данных с концепциями объектно-ориентированных языков программирования</p>
+            <img src="img/orm.jpeg" alt="ORM">
+        </section>
+
+        <section>
+            <h2><a href="http://design-pattern.ru/patterns/active-record.html" target="_blank">Active record</a></h2>
+            <p>
+                Объект является "обёрткой" одной строки из БД или представления, включает в себя доступ к БД и логику обращения с данными
+            </p>
+            <img src="img/active_record.gif" alt="Active Record" width="60%">
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.ru/docs/v5/eloquent" target="_blank">Модели Eloquent</a></h2>
+            <p>Создание модели используя Artisan. Используя параметр <i>-m</i> можно сразу создать миграцию</p>
+            <pre class="with-code">
+                <code class="lang-bash" data-trim data-noescape>
+                   php artisan make:model User
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="https://laravel.ru/docs/v5/queries" target="_blank">Конструктор запросов</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                    // получить все записи из таблицы
+                   $users = DB::table('users')->get();
+
+                    // получить одну строку
+                    $user = DB::table('users')->where('name', 'John')->first();
+
+                    // получить количество пользователей
+                    $usersCount = DB::table('users')->count();
+
+                    // объединения
+                    $users = DB::table('users')
+                                ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
+                                ->get();
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>

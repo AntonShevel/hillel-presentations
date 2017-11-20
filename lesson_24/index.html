@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hillel PHP course Lesson 24</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="Anton Shevel">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="../vendor/css/reveal.css">
+    <link rel="stylesheet" href="../vendor/css/theme/beige.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../vendor/lib/css/github.css">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <!--[if lt IE 9]>
+    <script src="../vendor/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>PHP</h1>
+            <h3>Урок 24</h3>
+        </section>
+
+        <section>
+            <h1>Generators, Генераторы</h1>
+        </section>
+
+        <section>
+            <h2><a href="https://ru.wikipedia.org/wiki/%D0%98%D1%82%D0%B5%D1%80%D0%B0%D1%82%D0%BE%D1%80#Генераторы" target="_blank">Генераторы</a></h2>
+            <p>Генератор — функция, которая помнит, в каком месте был предыдущий return, и при следующем вызове возобновляет работу с прерванного места.</p>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.generators.syntax.php" target="_blank">Yield</a></h2>
+            <p>Оператор "yield" можно рассматривать как оператор "return", за исключением того, что вместо прекращения работы функции, "yield" только приостанавливает ее выполнение и возвращает текущее значение, и при следующем вызове функции она возобновит выполнения с места, на котором прервалась.</p>
+        </section>
+
+        <section>
+            <h2>Немного примеров...</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                   function gen_one_to_three() {
+                        for ($i = 1; $i <= 3; $i++) {
+                            // Обратите внимание, что $i сохраняет свое значение между вызовами.
+                            yield $i;
+                        }
+                    }
+
+                    // получим экземпляр класса Generator
+                    $generator = gen_one_to_three();
+                    foreach ($generator as $value) {
+                        echo "$value "; выведет 1 2 3
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.generators.syntax.php" target="_blank">Получение значений с ключами</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                   function gen_one_to_three_hello() {
+                        for ($i = 1; $i <= 3; $i++) {
+                            yield $i => "hello"; // можно передавать ключи
+                        }
+                    }
+
+                    // получим экземпляр класса Generator
+                    $generator = gen_one_to_three_hello();
+                    $array = [];
+                    foreach ($generator as $key => $value) {
+                        $array[$key] = $value;
+                    }
+                    /*
+                    Array
+                    (
+                        [1] => hello
+                        [2] => hello
+                        [3] => hello
+                    )
+                    */
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2><a href="http://php.net/manual/ru/language.generators.syntax.php" target="_blank">Делегирование генератора</a></h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                   function count_to_five() {
+                        yield 1;
+                        yield 2;
+                        yield from [3, 4];
+                        yield from five();
+                    }
+                    function five() {
+                        yield 5;
+                    }
+                    foreach (count_to_five() as $num) {
+                       echo "$num ";
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h2>Больше примеров...</h2>
+            <pre class="with-code">
+                <code class="lang-php" data-trim data-noescape>
+                   function getLines($file) {
+                        $f = fopen($file, 'r');
+                        if (!$f) throw new Exception();
+                        while ($line = fgets($f)) {
+                            yield $line;
+                        }
+                        fclose($f);
+                    }
+
+                function xrange($start, $limit, $step = 1) {
+                    if ($start < $limit) {
+                        if ($step <= 0) {
+                            throw new LogicException('Step must be +ve');
+                        }
+
+                        for ($i = $start; $i <= $limit; $i += $step) {
+                            yield $i;
+                        }
+                    } else {
+                        if ($step >= 0) {
+                            throw new LogicException('Step must be -ve');
+                        }
+
+                        for ($i = $start; $i >= $limit; $i += $step) {
+                            yield $i;
+                        }
+                    }
+                }
+
+                /* Обратите внимание, что и range() и xrange() дадут один и тот же вывод */
+
+                echo 'Нечетные, однознаковые числа с помощью range():  ';
+                foreach (range(1, 9, 2) as $number) {
+                    echo "$number ";
+                }
+                echo "\n";
+
+                echo 'Нечетные, однознаковые числа с помощью xrange(): ';
+                foreach (xrange(1, 9, 2) as $number) {
+                    echo "$number ";
+                }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+            <h1>The End</h1>
+        </section>
+
+    </div>
+
+</div>
+
+<script src="../vendor/lib/js/head.min.js"></script>
+<script src="../vendor/js/reveal.js"></script>
+<script src="../assets/js/script.js"></script>
+
+</body>
+</html>
